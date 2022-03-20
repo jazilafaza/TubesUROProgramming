@@ -4,33 +4,15 @@
 import random
 import math
 
-
-# KAMUS
-
-peta = [[". " for j in range(10)] for i in range(10)] # inisialisasi peta 10x10
-
-
-# ATRIBUT
-jarakMax= 5
-# jarak maksimum kurama dan bunshin dapat menembak/menyerang satu sama lain,
-# jarak ini adalah jarak euclidean yang meruapakan panjang garis lurus yang menghubungkan kurama dengan bunshin
-
-damageKurama = 300
-damageBunshin = 200
-healthKurama = 5000
-healthBunshin =1000
-
-
-#INISIALISASI
-x=0 # koordinat awal kurama di titik 0,0
-y=0
-peta[y][x]= "K " # meletakkan kurama di peta (yang ditampilkan dengan health kurama)
-
 # fungsi random spawn bunshin
 def bunshin():
     global a,b
     a = random.randint(1,9)
     b = random.randint(1,9)
+    while a==x and b==y : # agar bunshin tidak spawn di tempat kurama
+        a = random.randint(1,9)
+        b = random.randint(1,9)
+
     peta[b][a] = "B "
 
 # fungsi untuk menampilkan peta beserta kurama dan bunshinnya
@@ -65,37 +47,38 @@ def gerak():
     if n=="atas":
         peta[y][x]= ". "
         y += 1
-        if 0<=x<=9 and 0<=y<=9 :
+        if 0<=x<=9 and 0<=y<=9 and not(x==a and y==b):
             peta[y][x]= "K "
         else:
-            print("Kurama melewati batas arena!")
+            print("Kurama melewati batas arena atau menabrak Bunshin!")
             y-=1
             peta[y][x]= "K "
+
     elif n=="bawah":
         peta[y][x]= ". "
         y -=1
-        if 0<=x<=9 and 0<=y<=9 :
+        if 0<=x<=9 and 0<=y<=9 and not(x==a and y==b) : 
             peta[y][x]= "K "
         else:
-            print("Kurama melewati batas arena!")
+            print("Kurama melewati batas arena atau menabrak Bunshin!")
             y+=1
             peta[y][x]= "K "
     elif n=="kanan":
         peta[y][x]= ". "
         x+=1
-        if 0<=x<=9 and 0<=y<=9 :
+        if 0<=x<=9 and 0<=y<=9 and not(x==a and y==b) :
             peta[y][x]= "K "
         else:
-            print("Kurama melewati batas arena!")            
+            print("Kurama melewati batas arena atau menabrak Bunshin!")            
             x-=1
             peta[y][x]= "K "
     elif n=="kiri":
         peta[y][x]= ". "
         x-=1
-        if 0<=x<=9 and 0<=y<=9 :
+        if 0<=x<=9 and 0<=y<=9 and not(x==a and y==b):
             peta[y][x]= "K "
         else:
-            print("Kurama melewati batas arena!")
+            print("Kurama melewati batas arena atau menabrak Bunshin!")
             x+=1
             peta[y][x]= "K "
 
@@ -106,7 +89,27 @@ def isValid():
     else:
         return False
 
+
+
 # MAIN PROGRAM
+
+peta = [[". " for j in range(10)] for i in range(10)] # inisialisasi peta 10x10
+
+# ATRIBUT
+jarakMax= 5
+# jarak maksimum kurama dan bunshin dapat menembak/menyerang satu sama lain,
+# jarak ini adalah jarak euclidean yang meruapakan panjang garis lurus yang menghubungkan kurama dengan bunshin
+
+damageKurama = 300
+damageBunshin = 200
+healthKurama = 5000
+healthBunshin =1000
+
+
+#INISIALISASI
+x=0 # koordinat awal kurama di titik 0,0
+y=0
+peta[y][x]= "K " # meletakkan kurama di peta (yang ditampilkan dengan health kurama)
         
 bunshin()
 jumlah=1
