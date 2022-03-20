@@ -17,4 +17,4 @@ sebagai arena perang. Robot akan ditempatkan pada titik (0,0) dan Mecha-Kurama a
 6. Jika user memilih input atas, bawah, kanan, atau kiri maka robot akan bergerak satu satuan mengikuti perintah yang dimasukkan.
 7. Program akan berhenti jika health robot 0 point atau saat user memilih input stop dan program akan menyatakan banyaknya Mecha-Kurama yang terbunuh.
 
-Link GitHub : 
+Link GitHub : https://github.com/jazilafaza/TubesUROProgramming
